@@ -4,7 +4,7 @@
   <title><![CDATA[Category: c++ | nomi's blog]]></title>
   <link href="http://nomi-wei.github.com/blog/categories/c-plus-plus/atom.xml" rel="self"/>
   <link href="http://nomi-wei.github.com/"/>
-  <updated>2013-04-07T17:33:56+08:00</updated>
+  <updated>2013-04-07T19:22:49+08:00</updated>
   <id>http://nomi-wei.github.com/</id>
   <author>
     <name><![CDATA[nomi(Otto Lu)]]></name>
@@ -155,7 +155,67 @@ class MsgSender&lt;CompanyZ&gt;{
 
 <p>traits是能获取部分类型信息</p>
 
-<p>(饿了 吃个饭继续写~)</p>
+<p>(饿了 吃个饭继续写~)
+back~</p>
+
+<h4>条款48:认识template元编程</h4>
+
+<p>很power的一条啊,将部分工作放在编译器完成,利用编译器多态的方式,实现类似if else的判断,其中书上举了个Factorial的例子,一窥其实现,值得日后好好去看看,研究.</p>
+
+<p>第七章总的来说,为精彩的template起了个头吧.可能写作水平不高,一下子很难概括,而且也打算以后系统性的总结,感觉意义才大.</p>
+
+<h3>第八章</h3>
+
+<h4>条款49:了解new-handler的行为</h4>
+
+<p>处理内存分配不成功时的情况.</p>
+
+<h4>条款50:了解new和delete的合理替换时机</h4>
+
+<ol>
+<li>用来检测运用上的错误;</li>
+<li>强化效能;</li>
+<li>收集使用统计数据;</li>
+<li>增加分配和归还速度;</li>
+<li>降低缺省内存管理器带来的空间额外开销;</li>
+<li>弥补缺省分配器中的非最佳齐位;</li>
+<li>将相关对象成簇集中;</li>
+<li>获得非传统的行为</li>
+</ol>
+
+
+<h4>条款51:编写new和delete时需固守常规</h4>
+
+<p>就是别乱来,C++规定new至少返回一个合法指针;应该按正常的new,delete步骤处理,例如抛出一样的异常等.</p>
+
+<h4>条款52:写了placement new也要写placement delete</h4>
+
+<p>第八章打算在写另一个本书的读书笔记的时候,再稍微详细的写一次,这个部分估计也是应该深究一下的,所以这里就简单带过吧.</p>
+
+<h3>第九章</h3>
+
+<h4>条款53:不要轻忽编译器的警告</h4>
+
+<p>用最苛刻的警告等级,写出无警告的代码.</p>
+
+<h4>条款54:让自己熟悉包括TR1在内的标准程序库</h4>
+
+<p>你不说我都会啦~呵呵</p>
+
+<h4>条款55:让自己熟悉Boost</h4>
+
+<p>同上,不解释.当看完BJ的C++程序设计和MEC++,ESTL等"入门书"之后打算就看Boost的了.</p>
+
+<hr />
+
+<h2>矮油,终于总结完啦~</h2>
+
+<p>用了一个多下午的时间啊,不过总结一下,方便以后review吧,把自己的理解写上了.
+尽量每本书都写写读书笔记吧,或长或短,EC++确实好书,就写长点吧!哈</p>
+
+<p>Keep Moving!</p>
+
+<p>(另外最近打算补回以前的某些书的读书笔记,好书应该总结一下.写写感悟也好)</p>
 ]]></content>
   </entry>
   
