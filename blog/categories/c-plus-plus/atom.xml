@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[nomi's blog]]></title>
-  <link href="http://nomi-wei.github.com/atom.xml" rel="self"/>
+  <title><![CDATA[Category: c++ | nomi's blog]]></title>
+  <link href="http://nomi-wei.github.com/blog/categories/c-plus-plus/atom.xml" rel="self"/>
   <link href="http://nomi-wei.github.com/"/>
   <updated>2013-04-07T15:17:38+08:00</updated>
   <id>http://nomi-wei.github.com/</id>
@@ -32,7 +32,7 @@
 
 <h4>条款1:视C++为一个语言联邦</h4>
 
-<p>C++确实比C变动太大,现在不得不吐槽一下那些说&#8221;C其实跟C++差不多的童鞋&#8221;,C++增加了OO,Template(后文的元编程让人眼前一亮),STL标准库(不过据闻大公司很多都不用这块,尤其24hrs运作的服务器,因为容易造成内存碎片化),这三块应该是变动最大的部分吧,也是核心了吧.相比而言,C真的小巧优雅啊.</p>
+<p>C++确实比C变动太大,现在不得不吐槽一下那些说"C其实跟C++差不多的童鞋",C++增加了OO,Template(后文的元编程让人眼前一亮),STL标准库(不过据闻大公司很多都不用这块,尤其24hrs运作的服务器,因为容易造成内存碎片化),这三块应该是变动最大的部分吧,也是核心了吧.相比而言,C真的小巧优雅啊.</p>
 
 <h4>条款2:尽量用const,enum,inline代替#define</h4>
 
@@ -181,33 +181,6 @@ ps:auto_ptr复制动作会使原来那个指向null</p>
 
 <p>来个中场休息吧~
 后边另起一篇,不然有点太长了~</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[新Blog的第一篇Blog]]></title>
-    <link href="http://nomi-wei.github.com/blog/2013/04/05/first-blog/"/>
-    <updated>2013-04-05T23:44:00+08:00</updated>
-    <id>http://nomi-wei.github.com/blog/2013/04/05/first-blog</id>
-    <content type="html"><![CDATA[<pre><code>hello,world
-</code></pre>
-
-<p>作为码农,第一句应该奉献给 hello,world 的.</p>
-
-<p>今晚搞了了一下,算是把 blog 迁移到 github 上了.
-本身计划是自己找个时间,用 node 写一个简单的 blog 编译脚本,先提供简单的功能用着,有空在一步步加功能的.</p>
-
-<p>but 最近确实忙哩(弱弱的说一句,有啥时候不忙),而且确实紧迫需要有个地方写读书笔记,旧 blog (暂时放在 sae 上的,用 wordpress 搭的)确实唔系写 blog 既好地方,不过文章唔算多,迟滴可以迁移过黎,等我自己写既 blog 出黎再算啦.</p>
-
-<p>所以哩,暂时只可以拿来主义一下,凑合用住 octopress 先了~ 主题有点略恶心啊,不过随便吧~ 估计就1,2个月就好了.</p>
-
-<p>至于自己计划写的新 blog 应该从头到尾都自己写了,包括js框架,反正提供基本功能就好,其实宜家都有个大概了,同埋一滴简单既插件都有一点点.</p>
-
-<p>另外都终于下单买左个域名了,林左我好耐哩,nomi 太短啦,都比人注册左了,好多都,只可以退而求其次,用 nomi-wei 了,最后林用<code>.me</code>定<code>.cn</code> or <code>.info</code>好,算吧都系<code>.cn</code>吧,去 godaddy 买,怕麻烦,只好弱弱地去万网了~(轻鄙,轻鄙~</p>
-
-<p>好吧,第一篇随便写写吧,就好了.</p>
-
-<p>晚安.</p>
 ]]></content>
   </entry>
   
