@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>nomi's blog</title>
+  <title>Effective C++ 读书笔记(续) - nomi's blog</title>
   <meta name="author" content="nomi(Otto Lu)">
 
   
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://nomi-wei.github.com">
+  <link rel="canonical" href="http://nomi-wei.github.com/blog/2013/04/07/effective-c-plus-plus-note-part2">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="nomi's blog" type="application/atom+xml">
@@ -63,15 +63,12 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+<article class="hentry" role="article">
   
-  
-  
-    <article>
-      
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/04/07/effective-c-plus-plus-note-part2/">Effective C++ 读书笔记(续)</a></h1>
+      <h1 class="entry-title">Effective C++ 读书笔记(续)</h1>
     
     
       <p class="meta">
@@ -94,7 +91,7 @@
   </header>
 
 
-  <div class="entry-content"><p>介个是第二部分</p>
+<div class="entry-content"><p>介个是第二部分</p>
 
 <h3>第五章</h3>
 
@@ -233,220 +230,16 @@ class MsgSender&lt;CompanyZ&gt;{
 
 <p>(饿了 吃个饭继续写~)</p>
 </div>
-  
-  
 
 
-    </article>
-  
-  
-    <article>
+  <footer>
+    <p class="meta">
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/04/07/effective-c-plus-plus-notes/">Effective C++ 读书笔记</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
   
 
+<span class="byline author vcard">Posted by <span class="fn">nomi(Otto Lu)</span></span>
 
-<time datetime="2013-04-07T11:52:00+08:00" pubdate data-updated="true">Apr 7<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>说起来真是挫逼,到现在才读ec++,现在终于找到自己想走的路,C C++ Javascript,是近几年的目标吧,希望能成为一个C后台开发者.</p>
-
-<p>以后读完一本好书之后,也写写总结,不然读完很快就忘了,也留个以后参考.</p>
-
-<h2>正文</h2>
-
-<p>EC++确实是一本好书,这个看完没多久我就感受到了,很多地方,细节很快就用得上了.</p>
-
-<p>总结的形式就每条细则的小点评吧.</p>
-
-<h3>第一章</h3>
-
-<h4>条款1:视C++为一个语言联邦</h4>
-
-<p>C++确实比C变动太大,现在不得不吐槽一下那些说&#8221;C其实跟C++差不多的童鞋&#8221;,C++增加了OO,Template(后文的元编程让人眼前一亮),STL标准库(不过据闻大公司很多都不用这块,尤其24hrs运作的服务器,因为容易造成内存碎片化),这三块应该是变动最大的部分吧,也是核心了吧.相比而言,C真的小巧优雅啊.</p>
-
-<h4>条款2:尽量用const,enum,inline代替#define</h4>
-
-<p>确实预编译的简单替换这个还是蛮蛋疼的,太容易出错了吧~这样也不利于编译器优化啊(比如常量替换时,会造成多个常量副本),调试也不方便,比如遇到一个常量有问题了,也很难监控,因为没有变量名.</p>
-
-<p>enum hack能够创造一些常量,inline函数的话因为调试时有一个真正的函数,也会为调试带来方便,不然对着一堆代码很难知道原来是宏代码出错了,inline就没有定位的难题.</p>
-
-<h4>条款3:尽可能使用const</h4>
-
-<p>对输入,返回值加上合适的const能更容易发现错误,在编译阶段就能察觉.</p>
-
-<p>至于指针型的const,可以采取右往左读的方式,<code>const char* const p</code> a const pointer to const char, 另外<code>const xxx::iterator iter</code> iter是const,<code>xxx::const_iterator iter</code> *iter是const;</p>
-
-<p>然后还有函数const的问题,更多倾向于编程思想的讨论,就不细聊了,暂时注意点就好,尽量声明为const函数时,就小心不经意会改动该对象.</p>
-
-<h4>条款4:确定对象被使用前已先被初始化</h4>
-
-<pre><code>class T{
-  private:
-    int t;
-
-  public:
-    T(int _t){
-      t = _t;
-    }
-}
-</code></pre>
-
-<p>这样低效,因为是系统初始化,再手动赋值了~</p>
-
-<pre><code>class T{
-  private:
-    int t;
-
-  public:
-    T(int _t):t(_t){}
-}
-</code></pre>
-
-<p>记住了~</p>
-
-<p>还有可以用单例的手法避免对象具象化顺序问题,具体就是用static返回一个对象就好了~(不详细说了,忘了的话就看书吧,pdf P61,书码P31).小心多线程.</p>
-
-<h3>第二章</h3>
-
-<h4>条款5:了解C++默默编写并调用哪些函数</h4>
-
-<p>主要是构造,析构,copy构造,=重载,这几个吧.</p>
-
-<h4>条款6:若不想使用编译器自动生成的函数,就该明确拒绝</h4>
-
-<p>就是手动把他显式写成private就好了</p>
-
-<h4>条款7:为多态基类声明virtual析构函数</h4>
-
-<p>避免在使用多态特性的时候,只析构了父类的部分~你懂的</p>
-
-<h4>条款8:别让异常逃离析构函数</h4>
-
-<p>容易发生不明确行为.反正就这样记吧.</p>
-
-<h4>条款9:绝不在构造和析构过程中调用virtual函数</h4>
-
-<p>因为会调用父类virtual函数的部分当调用父类构造函数时,如果其有调用该virtual函数的话(有点绕,可能表达略不当)</p>
-
-<h4>条款10:令operator=返回一个reference to *this</h4>
-
-<p>为了可以连续赋值(其实返回自身就可以实现了),和实现一些特殊操作吧,如<code>(T = 5).x = 'demo'</code>.</p>
-
-<h4>条款11:在operator=中处理自我赋值</h4>
-
-<p>建议传入值再调用swap的方法处理,貌似不够高效~反正注意就好</p>
-
-<h4>条款12:复制对象时勿忘其每一个成分</h4>
-
-<p>不解释,记住调用父类的copy函数</p>
-
-<h3>第三章</h3>
-
-<h4>条款13:以对象管理资源</h4>
-
-<p>这就是RAII(资源取得的时机就是初始化时机)出现的地方了,用tr1::shared_ptr包装一下该资源,就不会不记得释放了吧~
-ps:auto_ptr复制动作会使原来那个指向null</p>
-
-<h4>条款14:在资源管理类中小心coping行为</h4>
-
-<p>tr1::shared_ptr包装一个包装类就好,shared_ptr能设定默认的删除器</p>
-
-<h4>条款15:在资源管理类中提供对原始资源的访问</h4>
-
-<h4>条款16:成对使用new和delete时要采取相同的形式</h4>
-
-<p>记住这话吧.</p>
-
-<h4>条款17:以独立语句将newed对象置入智能指针</h4>
-
-<p>主要说了不用一句代码包含太多东西,拆分一下,避免异常时,不好解决.</p>
-
-<h3>第四章</h3>
-
-<h4>条款18:让接口容易被正确使用,不易被误用</h4>
-
-<p>这个涉及设计理念了,在写Unix编程思想的读书笔记时,可以深入总结.</p>
-
-<h4>条款19:设计class犹如设计type</h4>
-
-<p>不解释.</p>
-
-<h4>条款20:宁以pass-by-reference-const替换pass-by-value</h4>
-
-<ol>
-<li>效率原因;</li>
-<li>如果传入参数命名为父类想多态调用的话,pass-by-value的话会数据截断;</li>
-<li>基本类型,STL迭代器,函数对象的话,pass-by-value往往更好;
-(函数对象是个比较有趣的东西)</li>
-</ol>
-
-
-<h4>条款21:必须返回对象时,别妄想返回其reference</h4>
-
-<ol>
-<li>如果返回的东西是在函数类定义的(非new),那么函数调用后,就回收栈内存了,木有了;</li>
-<li>主要返回引用太容易造成指向空对象的问题的,要小心;</li>
-</ol>
-
-
-<h4>条款22:将成员变量声明为private</h4>
-
-<p>就是注意封装性.</p>
-
-<h4>条款23:宁以non-member,non-friend替换member函数</h4>
-
-<p>这里说法有点过于绝对了,个人理解还是跟类设计相关的,跟类本身紧密相连的方法,还是肯定应该为成员函数的.</p>
-
-<h4>条款24:若所有参数皆需类型转换,请为此采用non-member函数</h4>
-
-<p>看<code>result = 2 * result</code>如果用member函数重载的话,就咔嚓了,全局重载还是蛮不错的哦~(卖个萌</p>
-
-<h4>条款25:考虑写一个不抛异常的swap函数</h4>
-
-<blockquote><p>swap是个有趣的函数,原本它只是STL的一部分,而后成为异常安全性编程的脊柱.</p></blockquote>
-
-<p>有机会要搜搜啊,记得.</p>
-
-<p>这个有点高深,不好总结,写swap函数用时记得看看(pdf P140,页码 P110)</p>
-
-<p>来个中场休息吧~
-后边另起一篇,不然有点太长了~</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/04/05/first-blog/">新Blog的第一篇Blog</a></h1>
-    
-    
-      <p class="meta">
-        
 
 
 
@@ -458,45 +251,38 @@ ps:auto_ptr复制动作会使原来那个指向null</p>
   
 
 
-<time datetime="2013-04-05T23:44:00+08:00" pubdate data-updated="true">Apr 5<span>th</span>, 2013</time>
-        
-      </p>
+<time datetime="2013-04-07T15:20:00+08:00" pubdate data-updated="true">Apr 7<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/c-plus-plus/'>c++</a>, <a class='category' href='/blog/categories/du-shu-bi-ji/'>读书笔记</a>
+  
+</span>
+
+
+    </p>
     
-  </header>
-
-
-  <div class="entry-content"><pre><code>hello,world
-</code></pre>
-
-<p>作为码农,第一句应该奉献给 hello,world 的.</p>
-
-<p>今晚搞了了一下,算是把 blog 迁移到 github 上了.
-本身计划是自己找个时间,用 node 写一个简单的 blog 编译脚本,先提供简单的功能用着,有空在一步步加功能的.</p>
-
-<p>but 最近确实忙哩(弱弱的说一句,有啥时候不忙),而且确实紧迫需要有个地方写读书笔记,旧 blog (暂时放在 sae 上的,用 wordpress 搭的)确实唔系写 blog 既好地方,不过文章唔算多,迟滴可以迁移过黎,等我自己写既 blog 出黎再算啦.</p>
-
-<p>所以哩,暂时只可以拿来主义一下,凑合用住 octopress 先了~ 主题有点略恶心啊,不过随便吧~ 估计就1,2个月就好了.</p>
-
-<p>至于自己计划写的新 blog 应该从头到尾都自己写了,包括js框架,反正提供基本功能就好,其实宜家都有个大概了,同埋一滴简单既插件都有一点点.</p>
-
-<p>另外都终于下单买左个域名了,林左我好耐哩,nomi 太短啦,都比人注册左了,好多都,只可以退而求其次,用 nomi-wei 了,最后林用<code>.me</code>定<code>.cn</code> or <code>.info</code>好,算吧都系<code>.cn</code>吧,去 godaddy 买,怕麻烦,只好弱弱地去万网了~(轻鄙,轻鄙~</p>
-
-<p>好吧,第一篇随便写写吧,就好了.</p>
-
-<p>晚安.</p>
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://nomi-wei.github.com/blog/2013/04/07/effective-c-plus-plus-note-part2/" data-via="" data-counturl="http://nomi-wei.github.com/blog/2013/04/07/effective-c-plus-plus-note-part2/" >Tweet</a>
+  
+  
+  
 </div>
-  
-  
 
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/04/07/effective-c-plus-plus-notes/" title="Previous Post: Effective C++ 读书笔记">&laquo; Effective C++ 读书笔记</a>
+      
+      
+    </p>
+  </footer>
+</article>
 
-    </article>
-  
-  <div class="pagination">
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
 </div>
+
 <aside class="sidebar">
   
     <section>
@@ -524,6 +310,7 @@ ps:auto_ptr复制动作会使原来那个指向null</p>
 
   
 </aside>
+
 
     </div>
   </div>
