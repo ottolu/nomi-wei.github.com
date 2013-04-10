@@ -4,7 +4,7 @@
   <title><![CDATA[Category: 读书笔记 | nomi's blog]]></title>
   <link href="http://nomi-wei.github.com/blog/categories/du-shu-bi-ji/atom.xml" rel="self"/>
   <link href="http://nomi-wei.github.com/"/>
-  <updated>2013-04-07T19:22:49+08:00</updated>
+  <updated>2013-04-10T12:28:08+08:00</updated>
   <id>http://nomi-wei.github.com/</id>
   <author>
     <name><![CDATA[nomi(Otto Lu)]]></name>
@@ -12,6 +12,230 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[C++程序设计语言读书笔记-基础部分]]></title>
+    <link href="http://nomi-wei.github.com/blog/2013/04/10/c-plus-plus-lang-note-basic-part/"/>
+    <updated>2013-04-10T10:41:00+08:00</updated>
+    <id>http://nomi-wei.github.com/blog/2013/04/10/c-plus-plus-lang-note-basic-part</id>
+    <content type="html"><![CDATA[<p>算是把C++程序设计语言的语言基础部分看完了,将近900页的大部头,应该分两段写个小总结吧.</p>
+
+<p>读书的过程中,也把印象深刻的部分做了个记号,现在把他们整理成一篇Blog,权当顺便作一次review吧.</p>
+
+<hr />
+
+<p>语言基础部分,大多都比较基础,估计不总结也不会忘的了,至于virtual, template等部分,特别是后者,几乎是语言中最精彩,复杂的部分了,一下子估计也能难总结出太全面的东西,需要以后不断学习去深挖多态和泛型这两个重要点.</p>
+
+<h4>用大括号初始化结构和数组</h4>
+
+<p>开始的第一条有点水~不过我有时候确实会忘掉,其实也挺好记的,语义就本来如此,想想javascript的话,多自己记忆更有帮助.</p>
+
+<h4>注意啥时候生成的是临时变量</h4>
+
+<pre><code>int *q = &amp;(x++);  //错误: x++不是一个左值
+</code></pre>
+
+<p>这里要注意的是, x++返回的是x的副本,一个临时变量而已了,取他的指针或引用都是没有意义的.(应该是在栈内存里生成的,但是这类临时变量暂时不知道是啥时候会回收的呢?作用域离开了之后?应该搜搜)</p>
+
+<h4>reinterpret_cast是可以将地址值强制赋给一个指针的</h4>
+
+<p>这个估计平时也不会用吧,这么危险,估计这个地址值也是相对地址而已.</p>
+
+<h4>无名字的namespace</h4>
+
+<p>namespace是解决函数名,变量名等冲突的好办法,个人感觉有点结构,类的理念.</p>
+
+<pre><code>namespace {
+  // some code here
+}
+</code></pre>
+
+<p>等价于</p>
+
+<pre><code>namespace $$$ {
+  // some code here
+}
+using namespace $$$;
+</code></pre>
+
+<p>当然<code>$$$</code>是全局唯一的,这种较为诡异的东西,能不用就不用吧,除非大牛都是这么用,毕竟这个,其他地方就用不了里面的东西了.</p>
+
+<h4>namespace是可以赋值的</h4>
+
+<p>就是可以起一个别名</p>
+
+<pre><code>namespace lib = std;
+</code></pre>
+
+<p>另外可以用using来组合取自己想要的空间,这跟这条没关系.</p>
+
+<h4>namespace是开放的</h4>
+
+<p>无厘头看到笔记有这么一句~应该是说namespace一样的块,里面是互通的吧.</p>
+
+<h4>把全局const和inline放在头文件里</h4>
+
+<p>主要就是这个意思吧,当然具体哪几个cc文件用到同一个常量的,就放在公有的头文件里好了.
+<code>const</code>和<code>typedef</code>的作用范围仅仅在该文件内部,so你懂的~</p>
+
+<p>来两个合法的例子:</p>
+
+<pre><code>// file1.c
+typedef int T;
+const int x = 7;
+
+// file2.c
+typedef void T;
+const int x = 8;
+</code></pre>
+
+<p>另一个:</p>
+
+<pre><code>// file1.c
+extern const int a = 77;
+
+// file2.c
+extern const int a;
+cont&lt;&lt;a&lt;&lt;endl; // 77
+</code></pre>
+
+<h4>extern和mutable,延迟求值要看看</h4>
+
+<p>算了,总结完之后,我立马简单搜搜,看看是咋回事.</p>
+
+<h4>explicit关键字</h4>
+
+<p>表明其构造函数必须显式调用.</p>
+
+<pre><code>explicit string(int n); // 预分配空间
+string(const char *p);
+
+string s1 = 'a'; // 错误,因为char-&gt;int-&gt;string
+</code></pre>
+
+<p>太多时候隐含着隐式调用了,这种"一不小心"的自动转换,很容易就误解了编码的意思.如果这里没有<code>explicit</code>的声明,那么就呵呵了,变成预分配了一段空间了.</p>
+
+<h4>->的重载</h4>
+
+<p><code>-&gt;</code>可以定义为一个一元后缀运算符.</p>
+
+<blockquote><p>ptr->x 重载后等于 (ptr.operator -> ())->x
+不过我个人觉得应该有2元版本的重载?!</p></blockquote>
+
+<p>另外后面还提到了灵巧指针这么一回事,就是重载他去返回一个操作对象.</p>
+
+<pre><code>Disk_ptr p("a.txt");
+
+p-&gt;name = "a.txt";
+</code></pre>
+
+<p>通过适度的重载,这里就方便了磁盘的操作,比如这里可以析构时写会或者回收资源等~发挥想象力.</p>
+
+<p>记得要符合语义~别太乱来啊.</p>
+
+<h4>用模板参数传递策略</h4>
+
+<p>直接上一段代码:</p>
+
+<pre><code>template&lt;class C&gt;
+int compare(const string&amp; str1, const string&amp; str2){
+  // some code
+  C::cmp(str1, str2);
+  // other code
+}
+
+// 然后Test1和Test2都具有cmp函数
+
+compare&lt;Test1&gt;(str1, str2);
+compare&lt;Test2&gt;(str1, str2);
+</code></pre>
+
+<p>也算是挺有意思的手法,其实跟传函数指针差不多.</p>
+
+<p>对比于传函数指针,这个可以传inline函数啊.(貌似函数指针的方法也不是不行,不过容易有问题?!);而且还可以一下子传入好几个策略函数啊!!!</p>
+
+<h4>不知怎么概括</h4>
+
+<p>直接上代码:</p>
+
+<pre><code>// out.h
+template&lt;class T&gt; void out(const T &amp;t);
+
+// out.c
+#include&lt;iostream&gt;
+#include "out.h"
+
+export template&lt;class T&gt; void out(const T &amp;t){
+  std:cout&lt;&lt;t;
+}
+
+// file.c
+#include "out.h"
+// call out
+</code></pre>
+
+<h4>为指针的容器提供专门化,以减少代码规模</h4>
+
+<h4>dynamic_cast</h4>
+
+<p>具备多态性质才能转换,若父类为非虚类(没有虚函数),不能转换.</p>
+
+<blockquote><p>虚基类指针->子类指针
+<code>static_cast</code> can't
+<code>dynamic_cast</code> can</p>
+
+<p>实基类指针->子类指针
+both can</p></blockquote>
+
+<p><code>static_cast</code>应该是有点硬来的强制转换,就像C的struct转换一样,而<code>dynamic_cast</code>是运行时多态的转换.另外若dynamic_cast转换失败,会返回0.</p>
+
+<h4>静态和动态强制转换</h4>
+
+<pre><code>// 继承关系 Storable&lt;-Receiver&lt;-Radio
+
+Radio &amp;r = xxx;
+
+Receiver *prec = &amp;r; // Receiver是Radio的常规基类
+Radio *pr = static_cast&lt;Radio*&gt;(prec); // 可以:不检查
+pr = dynamic_cast&lt;Radio*&gt;(prec); // 可以:运行时检查
+
+Storable *ps = &amp;r; // Storable是Radio的虚基类
+pr = static_cast&lt;Radio*&gt;(ps); // 错误:不能从虚基类强制转换
+pr = dynamic_cast&lt;Radio*&gt;(ps); // 可以:运行时检查
+</code></pre>
+
+<p>这个向下转换,两者还是有很大的不同.</p>
+
+<h4>类成员指针</h4>
+
+<pre><code>typedef void (Std_interface::* Pstd_mem)();
+
+void f(Std_interface* p){
+  Pstd_mem s = &amp;Std_interface::suspend;
+  p-&gt;suspend();
+  (p-&gt;*s)();
+}
+</code></pre>
+
+<p>真的挺有趣的,不过可能实用性不是很大,除非有方法可以动态改变类啊,能获取类的成员列表啊(这就会有点像反射了),不然其实都知道要调用那个函数了,这样绕一下至少装逼而已.</p>
+
+<p>当然他提出了一个用法是,一个数组存对象,一个数组存方法名,然后可以<code>f(obj[i],mth[j]);</code>的方法,调用函数.而且这个也应该是遵循多态的.</p>
+
+<p>除此之外,类成员的静态函数,不能这么干,其实算起来,他只不过是一个普通函数而已.</p>
+
+<h4>其他杂七杂八的</h4>
+
+<p>适度的搞个函数对象,确实很灵活啊,不过不急深究,到时看STL源码剖析的时候,估计到处都是了.</p>
+
+<p>另外运算符顺序一般也不会背吧,不肯定的时候,记得适度加括号.</p>
+
+<hr />
+
+<p>这本书的基础部分,一遍看下来,感觉主要这些要注意的地方,语言细节就不细说了,基本都没啥.</p>
+
+<p>接下来是标准库部分了,这本书后面的.走,吃饭去~</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Effective C++ 读书笔记(续)]]></title>
