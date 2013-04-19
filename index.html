@@ -9,7 +9,9 @@
   <meta name="author" content="nomi(Otto Lu)">
 
   
-  <meta name="description" content="算是把C++程序设计语言的语言基础部分看完了,将近900页的大部头,应该分两段写个小总结吧. 读书的过程中,也把印象深刻的部分做了个记号,现在把他们整理成一篇Blog,权当顺便作一次review吧. 语言基础部分,大多都比较基础,估计不总结也不会忘的了,至于virtual, template等部分 &hellip;">
+  <meta name="description" content="看看日期,我擦,太久没写blog了吧
+当然之前也因为模式识别的大作业占了不少时间~ 是还没写完的,先发发~
+攒个commit,哈 typename的作用 如果模板内,使用传入模板的类型里的类或结构定义一个新的变量时,会默认当作静态变量 如A::class *p默认解析成, &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -65,6 +67,90 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/04/20/c-plus-plus-lang-note-std-part/">C++程序设计语言读书笔记-标准库部分</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-20T00:18:00+08:00" pubdate data-updated="true">Apr 20<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>看看日期,我擦,太久没写blog了吧
+当然之前也因为模式识别的大作业占了不少时间~</p>
+
+<p>是还没写完的,先发发~
+攒个commit,哈</p>
+
+<hr />
+
+<h4>typename的作用</h4>
+
+<p>如果模板内,使用传入模板的类型里的类或结构定义一个新的变量时,会默认当作静态变量</p>
+
+<p>如<code>A::class *p</code>默认解析成,A中静态变量class与p相乘,而不是声明一个p指针,
+故需要<code>typename A::class *p</code></p>
+
+<p>vector而言,begin()指向第一个元素的迭代器,front()指向第一个元素,back()指向最后一个元素,end()指向 最后元素的下一个位置.
+声明<code>vector&lt;Car&gt; vcar(100)</code>时,默认调用Car()无参构造函数.</p>
+
+<p><code>erase(p1,p2)</code>删除从p1到p2的元素,不包括p2.</p>
+
+<p>大规模insert之后,要注意迭代器可能会失效,因为可能导致内存块不足,重新分配内存,所以原来的迭代器指向无意义的地方.</p>
+
+<p>用<code>base()</code>从reverse_iterator抽取出iterator</p>
+
+<p>Ran指随机访问迭代器 Bi指双向迭代器</p>
+
+<p>list中<code>unique()</code>建议先<code>sort()</code>再调用,才保证完全唯一.(不然只清除前后相同的情况)</p>
+
+<p>建立map需要可以<code>&lt;</code>比较或传入一个比较函数.</p>
+
+<p>注意在map等key-value集合中,key不建议使用<code>char*</code>类型,因为直接的<code>&lt;</code>比较会出问题,除非你记得用<code>strcmp</code>去比较,要清楚自己在干什么.</p>
+
+<p>equal_range可以看看</p>
+
+<h3>第18章</h3>
+
+<p>标准库算法中的unique()没有把重复元素删除,只是把他移到后面而已,然后返回指向第一个重复元素的指针.
+用unique_copy()生成一个新的队列更合适.或者配合erase()使用</p>
+
+<p>多用算法,少用循环.</p>
+
+<p>不肯定书上的大多数标准库算法函数实现方法是不是真的,如果是的话,也确实像作者吐槽的那样,&#8221;这些代码也简单得很&#8221;.
+计划中会看&lt;&lt;STL源码剖析>></p>
+
+<h3>第19章</h3>
+
+<p>暂无</p>
+
+<hr />
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -813,6 +899,10 @@ ps:auto_ptr复制动作会使原来那个指向null</p>
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/04/20/c-plus-plus-lang-note-std-part/">C++程序设计语言读书笔记-标准库部分</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2013/04/10/c-plus-plus-lang-note-basic-part/">C++程序设计语言读书笔记-基础部分</a>
