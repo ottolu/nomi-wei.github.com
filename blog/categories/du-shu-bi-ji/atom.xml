@@ -4,7 +4,7 @@
   <title><![CDATA[Category: 读书笔记 | nomi's blog]]></title>
   <link href="http://nomi-wei.github.com/blog/categories/du-shu-bi-ji/atom.xml" rel="self"/>
   <link href="http://nomi-wei.github.com/"/>
-  <updated>2013-04-20T00:54:35+08:00</updated>
+  <updated>2013-04-21T00:23:10+08:00</updated>
   <id>http://nomi-wei.github.com/</id>
   <author>
     <name><![CDATA[nomi(Otto Lu)]]></name>
@@ -18,55 +18,102 @@
     <link href="http://nomi-wei.github.com/blog/2013/04/20/c-plus-plus-lang-note-std-part/"/>
     <updated>2013-04-20T00:18:00+08:00</updated>
     <id>http://nomi-wei.github.com/blog/2013/04/20/c-plus-plus-lang-note-std-part</id>
-    <content type="html"><![CDATA[<p>看看日期,我擦,太久没写blog了吧
-当然之前也因为模式识别的大作业占了不少时间~</p>
+    <content type="html"><![CDATA[<p>看看日期,我擦,太久没写blog了吧</p>
 
-<p>是还没写完的,先发发~
+<p>当然之前也因为模式识别的大作业占了不少时间~</p>
+
+<p>-4月20日00:18:
+是还没写完的,先发发~
 攒个commit,哈</p>
+
+<p>其实想想 可能还得多写一篇blog总结</p>
+
+<p>另外格式估计比较凌乱~</p>
 
 <hr />
 
-<h4>typename的作用</h4>
+<ol>
+<li><p>typename的作用
+如果模板内,使用传入模板的类型里的类或结构定义一个新的变量时,会默认当作静态变量</p>
 
-<p>如果模板内,使用传入模板的类型里的类或结构定义一个新的变量时,会默认当作静态变量</p>
+<p>  如<code>A::class *p</code>默认解析成,A中静态变量class与p相乘,而不是声明一个p指针,
+故需要<code>typename A::class *p</code></p></li>
+<li><p>vector而言,begin()指向第一个元素的迭代器,front()指向第一个元素,back()指向最后一个元素,end()指向 最后元素的下一个位置.
+声明<code>vector&lt;Car&gt; vcar(100)</code>时,默认调用Car()无参构造函数.</p></li>
+<li><p><code>erase(p1,p2)</code>删除从p1到p2的元素,不包括p2.</p></li>
+<li><p>大规模insert之后,要注意迭代器可能会失效,因为可能导致内存块不足,重新分配内存,所以原来的迭代器指向无意义的地方.</p></li>
+<li><p>用<code>base()</code>从reverse_iterator抽取出iterator</p></li>
+<li><p><img src="../images/c-plus-plus-lang-notes.jpg" alt="我是一个表格." /></p>
 
-<p>如<code>A::class *p</code>默认解析成,A中静态变量class与p相乘,而不是声明一个p指针,
-故需要<code>typename A::class *p</code></p>
+<p> Ran指随机访问迭代器 Bi指双向迭代器</p></li>
+<li><p>list中<code>unique()</code>建议先<code>sort()</code>再调用,才保证完全唯一.(不然只清除前后相同的情况)</p></li>
+<li><p>建立map需要可以<code>&lt;</code>比较或传入一个比较函数.</p></li>
+<li><p>注意在map等key-value集合中,key不建议使用<code>char*</code>类型,因为直接的<code>&lt;</code>比较会出问题,除非你记得用<code>strcmp</code>去比较,要清楚自己在干什么.</p></li>
+<li><p>equal_range可以看看</p></li>
+</ol>
 
-<p>vector而言,begin()指向第一个元素的迭代器,front()指向第一个元素,back()指向最后一个元素,end()指向 最后元素的下一个位置.
-声明<code>vector&lt;Car&gt; vcar(100)</code>时,默认调用Car()无参构造函数.</p>
-
-<p><code>erase(p1,p2)</code>删除从p1到p2的元素,不包括p2.</p>
-
-<p>大规模insert之后,要注意迭代器可能会失效,因为可能导致内存块不足,重新分配内存,所以原来的迭代器指向无意义的地方.</p>
-
-<p>用<code>base()</code>从reverse_iterator抽取出iterator</p>
-
-<p>Ran指随机访问迭代器 Bi指双向迭代器</p>
-
-<p>list中<code>unique()</code>建议先<code>sort()</code>再调用,才保证完全唯一.(不然只清除前后相同的情况)</p>
-
-<p>建立map需要可以<code>&lt;</code>比较或传入一个比较函数.</p>
-
-<p>注意在map等key-value集合中,key不建议使用<code>char*</code>类型,因为直接的<code>&lt;</code>比较会出问题,除非你记得用<code>strcmp</code>去比较,要清楚自己在干什么.</p>
-
-<p>equal_range可以看看</p>
 
 <h3>第18章</h3>
 
-<p>标准库算法中的unique()没有把重复元素删除,只是把他移到后面而已,然后返回指向第一个重复元素的指针.
-用unique_copy()生成一个新的队列更合适.或者配合erase()使用</p>
+<ol>
+<li><p>标准库算法中的unique()没有把重复元素删除,只是把他移到后面而已,然后返回指向第一个重复元素的指针.
+用unique_copy()生成一个新的队列更合适.或者配合erase()使用</p></li>
+<li><p>多用算法<code>foreach</code>等,少用循环.</p></li>
+<li><p>不肯定书上的大多数标准库算法函数实现方法是不是真的,如果是的话,也确实像作者吐槽的那样,"这些代码也简单得很".
+ 计划中会看<code>&lt;&lt;STL源码剖析&gt;&gt;</code></p></li>
+</ol>
 
-<p>多用算法,少用循环.</p>
-
-<p>不肯定书上的大多数标准库算法函数实现方法是不是真的,如果是的话,也确实像作者吐槽的那样,"这些代码也简单得很".
-计划中会看&lt;&lt;STL源码剖析>></p>
 
 <h3>第19章</h3>
 
-<p>暂无</p>
+<p>说实话,没很认真的看啊~都是说各种迭代器的~</p>
+
+<p>流迭代器是可以挺猥琐地使用的~估计不会用到吧~</p>
+
+<p>其中有一块不错,是预分配一块内存,作为Pool使用.毕竟new和malloc都开销比较大啊~C的版本比较好写,看看C++之父会怎么做:</p>
+
+<pre><code>// 在Pool类里面, Pool类主要为一个链表分配空间
+Struct Chunk {
+  enum { size = 8 * 1024 - 16 };
+  char mem[size];
+  Chunk* next;
+}
+
+// 其他代码略过了~
+// 这个是关键函数,分配新一块空间的
+void Pool::grow(){
+  Chunk* n = new Chunk;
+  n-&gt;next = chunks; // chunks是Pool的私有成员
+  chunks = n;
+
+  const int nelem = Chunk::size / esize;
+  char* start = n-&gt;mem;
+  char* last= &amp;start[(nelem-1)*esize];
+  for (char* p = start; p &lt; last; p += esize) {
+    reinterpret_cast&lt;Link*&gt;(p)-&gt;next = reinterpret_cast&lt;Link*&gt;(p+size);
+    reinterpret_cast&lt;Link*&gt;(last)-&gt;next = 0;
+    head = reinterpret_cast&lt;Link*&gt;(start);
+  }
+}
+</code></pre>
+
+<p>不过这也只仅仅是一个思路,用char来hack这个还没真没好好想过,有机会看看工业级的pool代码吧.</p>
+
+<h3>其他</h3>
+
+<p>其他真心没能很仔细的总结,感觉不好总结,数值那章直接不看了,科学运算神马的,要用再算吧~</p>
+
+<p>最后那块是编程设计指导神马的,翻翻就过了,反正这东西还得从更适合的书里获取吧.</p>
 
 <hr />
+
+<p>后记部分了,写这笔记离看完那书,确实有那么几天了,很好的诠释了神马叫看完就忘~几乎要我想起来说了些啥,很费劲.不过看了又感觉很熟悉.</p>
+
+<p>姑且这样吧,也没啥法子,过一遍有个大概印象就好,写些感觉有趣的东西,也估计足够了吧.</p>
+
+<p>写笔记这个还得打铁趁热啊.</p>
+
+<p>接下来,总结一篇看到在云风大牛等blog里看到的技巧,再来一篇编程珠玑的总结吧,好歹看完了,不然又忘了,哈</p>
 ]]></content>
   </entry>
   
